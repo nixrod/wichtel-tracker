@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "The backend for the wichtel-tracker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nixrod/wichtel-tracker.git"
+  },
+  "author": "nixrod",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nixrod/wichtel-tracker/issues"
+  },
+  "homepage": "https://github.com/nixrod/wichtel-tracker#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

@@ -22,7 +22,7 @@ docker build -t wichtel-tracker .
 docker network create -d bridge my_network
 ```
 
-### 3. Run the Docker container
+### 4. Run the Docker container
 ```
 # runs the container in detached mode and exposes port 80
 docker run -p 80:8080 -e DB_PW=my-secret-pw --network my_network -d wichtel-tracker
@@ -36,7 +36,7 @@ docker logs <container id>
 docker exec -it <container id> /bin/bash
 ```
 
-### 4. Run the Mysql Docker container
+### 5. Run the Mysql Docker container
 ```
 # create data store folder
 mkdir /etc/mysql

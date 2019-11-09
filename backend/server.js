@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql');
 const connection = mysql.createConnection({
     host: process.env.HOST,
@@ -16,17 +17,16 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.use(express.static('static/webapp'));
+// TODO: only use in dev
+app.use(cors());
 connection.connect();
 
 
-app.get('/api', (req, res) => {
-    connection.query('SELECT 1 + 1 AS solution', function (err, rows, fields) {
+app.get('/api/users', (req, res) => {
+    connection.query('SELECT * FROM users ORDER BY name', function (err, rows) {
         if (err) throw err;
-
-        console.log('The solution is: ', rows[0].solution);
-        res.send('Hello world\n' + rows[0].solution);
+        res.json(rows);
     });
-
 });
 
 app.listen(PORT, HOST);

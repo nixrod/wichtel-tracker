@@ -1,0 +1,29 @@
+.background {
+  background-image: url("/assets/background.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  background-size: cover;
+
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  margin-top: 6em;
+  width: 20em;
+  height: fit-content;
+  padding: 1em;
+  background: rgb(255, 255, 255, 0.8);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+}
+
+form * {
+  width: 100%;
+}

@@ -15,6 +15,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+ENV HOST=mysql-db
+
 EXPOSE 8080
 
 CMD [ "node", "server.js" ]

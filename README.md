@@ -7,6 +7,7 @@ Manages the wichtel christmas process
 ```
 # builds and copies the dist files to the express static folder
 cd webapp
+npm install
 npm run buildeploy
 ```
 
@@ -14,18 +15,24 @@ npm run buildeploy
 ```
 # creates a docker image containing the bundled backend and frontend
 cd ../backend
-docker build -t wichtel-tracker .
+docker build -t cloud.canister.io:5000/nixrod/wichtel-backend .
 ```
 
-### 3. Create the Docker network
+### 3. Push the Docker image
+```
+docker login cloud.canister.io:5000
+docker push cloud.canister.io:5000/nixrod/wichtel-backend
+```
+
+### 4. Create the Docker network
 ```
 docker network create -d bridge my_network
 ```
 
-### 4. Run the Docker container
+### 5. Run the Docker container
 ```
 # runs the container in detached mode and exposes port 80
-docker run -p 80:8080 -e DB_PW=my-secret-pw --network my_network -d wichtel-tracker
+docker run -p 80:8080 -e DB_PW=my-secret-pw --network my_network -d cloud.canister.io:5000/nixrod/wichtel-backend
 
 # Debug using those commands
 
@@ -36,7 +43,7 @@ docker logs <container id>
 docker exec -it <container id> /bin/bash
 ```
 
-### 5. Run the Mysql Docker container
+### 6. Run the Mysql Docker container
 
 Based on [Mysql Server](https://hub.docker.com/r/mysql/mysql-server/)
 

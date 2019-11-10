@@ -37,6 +37,9 @@ docker exec -it <container id> /bin/bash
 ```
 
 ### 5. Run the Mysql Docker container
+
+Based on [Mysql Server](https://hub.docker.com/r/mysql/mysql-server/)
+
 ```
 # create data store folder
 mkdir /etc/mysql

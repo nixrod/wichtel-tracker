@@ -7,10 +7,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule} from "@angular/material";
+import {WishlistFormComponent} from './wishlist-form/wishlist-form.component';
+import {FormSuccessComponent} from './form-success/form-success.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WishlistFormComponent,
+    FormSuccessComponent
   ],
   imports: [
     BrowserModule,

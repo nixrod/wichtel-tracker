@@ -44,9 +44,7 @@ mkdir /etc/mysql
 # start docker container use full path for volume
 docker run --name mysql-db -p 3306:3306 -v /etc/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=wichtel --network my_network -d mysql:latest
 
-# make the client authentication compatible with mysql 8
-ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'my-secret-pw';
-FLUSH PRIVILEGES; 
+# connect to the db and run db-init.sql using a GUI programm
 
 # Debug using those commands
 docker logs mysql-db

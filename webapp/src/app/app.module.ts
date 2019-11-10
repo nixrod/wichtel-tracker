@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatInputModule, MatSelectModule} from "@angular/material";
+import {MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule} from "@angular/material";
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import {MatButtonModule, MatInputModule, MatSelectModule} from "@angular/materia
     BrowserAnimationsModule,
     MatInputModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

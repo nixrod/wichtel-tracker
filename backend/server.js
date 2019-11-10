@@ -1,33 +1,28 @@
 'use strict';
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-    host: process.env.HOST,
-    user: 'root',
-    password: process.env.DB_PW,
-    database: 'wichtel'
-});
+const router = require('./src/router');
+const db = require('./src/mysql');
 
-// Constants
 const PORT = 8080;
 const HOST = '0.0.0.0';
 
-// App
+
+// Initialize Mysql connection
+db.connect();
+
+
+// Initialize App
 const app = express();
+
 app.use(express.static('static/webapp'));
-// TODO: only use in dev
 app.use(cors());
-connection.connect();
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 
-
-app.get('/api/users', (req, res) => {
-    connection.query('SELECT * FROM users ORDER BY name', function (err, rows) {
-        if (err) throw err;
-        res.json(rows);
-    });
-});
+app.use('/api', router);
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

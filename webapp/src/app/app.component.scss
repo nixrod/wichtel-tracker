@@ -1,3 +1,6 @@
+@import '~@angular/material/theming';
+@import '../styles';
+
 .background {
   background-image: url("/assets/background.jpg");
   height: 100%;
@@ -27,3 +30,9 @@ form {
 form * {
   width: 100%;
 }
+
+#submitButton {
+  margin-top: 10px;
+}
+
+

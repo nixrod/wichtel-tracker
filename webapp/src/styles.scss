@@ -34,3 +34,8 @@ body, html {
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.snackbar-warn {
+  font-size: 30px;
+  background-color: map-get($webapp-warn, 500);
+}

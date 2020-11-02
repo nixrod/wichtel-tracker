@@ -1,2 +1,2 @@
-mysql-connector-python==8.0.18
-sendgrid==6.1.0
+mysql-connector-python==8.0.22
+sendgrid==6.4.7

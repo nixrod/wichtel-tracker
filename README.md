@@ -1,63 +1,52 @@
 # wichtel-tracker
-Manages the wichtel christmas process
+Manages the Weihnachtswichtel christmas process of the Happel Family.
 
-## How to Build
+It consists of multiple components:
+- A frontend written in Angular. 
+- A backend using Node.js.
+- A MYSQL Database.
+- Various management scripts.
 
-### 1. Build Webapp
+
+## 🚶 Setting up local dev environment
+
+### 1. Start docker compose
+
+This starts the backend and mysql database in detached mode.
 ```
-# builds and copies the dist files to the express static folder
+docker-compse up -d
+```
+
+### 2. Initialize the database
+
+To do this run the statements in the scripts/db-init.sql file
+```
+mysql -h 127.0.0.1 -uroot -p wichtel <scripts/db-init.sql
+(enter pw from .env file)
+```
+
+### 3. Pick which component to work on
+
+#### Webapp
+```
 cd webapp
 npm install
-npm run buildeploy
+npm run start
 ```
 
-### 2. Create Docker image
+#### Backend
 ```
-# creates a docker image containing the bundled backend and frontend
-cd ../backend
-docker build -t cloud.canister.io:5000/nixrod/wichtel-backend .
+cd backend
+docker stop wichtel-tracker_web_1
+DB_PW=<see .env> HOST=localhost npm run start
 ```
+TODO: fix cors errors for local dev
 
-### 3. Push the Docker image
-```
-docker login cloud.canister.io:5000
-docker push cloud.canister.io:5000/nixrod/wichtel-backend
-```
+#### Scripts
+Currently, there is one python script to trigger the mail sending of the wichtel matches
 
-### 4. Create the Docker network
-```
-docker network create -d bridge my_network
-```
+## 🏃 Deploy on prod environment
 
-### 5. Run the Docker container
-```
-# runs the container in detached mode and exposes port 80
-docker run -p 80:8080 -e DB_PW=my-secret-pw --network my_network -d cloud.canister.io:5000/nixrod/wichtel-backend
-
-# Debug using those commands
-
-# Print app output
-docker logs <container id>
-
-# Enter the container
-docker exec -it <container id> /bin/bash
-```
-
-### 6. Run the Mysql Docker container
-
-Based on [Mysql Server](https://hub.docker.com/r/mysql/mysql-server/)
-
-```
-# create data store folder
-mkdir /etc/mysql
- 
-# start docker container use full path for volume
-docker run --name mysql-db -p 3306:3306 -v /etc/mysql:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -e MYSQL_DATABASE=wichtel --network my_network -d mysql:latest
-
-# connect to the db and run db-init.sql using a GUI programm
-
-# Debug using those commands
-docker logs mysql-db
-docker exec -it mysql-db bash
-
-```
+1. Clone git repository
+2. Modify .env file with prod credentials 
+3. follow docker-compose setup above

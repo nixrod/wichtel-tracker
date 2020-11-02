@@ -5,8 +5,6 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "deploy": "rm -rf ../backend/static/webapp && cp -a ./dist/. ../backend/static/",
-    "builddeploy": "npm run build && npm run deploy",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

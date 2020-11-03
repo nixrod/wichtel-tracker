@@ -14,7 +14,7 @@ It consists of multiple components:
 
 This starts the backend and mysql database in detached mode.
 ```
-docker-compse up -d
+docker-compose up -d
 ```
 
 ### 2. Initialize the database
@@ -50,3 +50,8 @@ Currently, there is one python script to trigger the mail sending of the wichtel
 1. Clone git repository
 2. Modify .env file with prod credentials 
 3. follow docker-compose setup above
+
+
+docker build -t cloud.canister.io:5000/nixrod/wichtel-backend .
+docker login cloud.canister.io:5000
+docker push cloud.canister.io:5000/nixrod/wichtel-backend

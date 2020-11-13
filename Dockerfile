@@ -14,6 +14,7 @@ FROM node:10
 WORKDIR /usr/src/app
 COPY backend/package*.json ./
 RUN npm install
+RUN npm run test
 COPY backend .
 COPY --from=0 /usr/src/webapp/dist static
 

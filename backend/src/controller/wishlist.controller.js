@@ -12,16 +12,11 @@ class WishlistController {
 
     async postWishlist(req, res) {
         let body = req.body;
+        let userId = req.params.userId;
 
-        if (!body.userId || !body.partnerId || !body.wishes || !body.email) {
+        if (!userId || !body.wishes || !body.email || !body.address) {
             res.status(400);
             res.send('Missing wishlist parameter');
-            return;
-        }
-
-        if (body.userId === body.partnerId) {
-            res.status(400);
-            res.send('User can\'t be it\'s own partner');
             return;
         }
 
@@ -39,21 +34,22 @@ class WishlistController {
             return;
         }
 
-        if (!await this.userService.doesUserIdExist(body.userId)) {
+        if (body.address.length > 21000) {
+            res.status(400);
+            res.send('Address is too long');
+            return;
+        }
+
+        if (!await this.userService.doesUserIdExist(userId)) {
             res.status(400);
             res.send('User does not exist');
             return;
         }
 
-        if (!await this.userService.doesUserIdExist(body.partnerId)) {
-            res.status(400);
-            res.send('Partner does not exist');
-            return;
-        }
-
         await Promise.all([
-            this.userService.updateUserEmail(body.userId, body.email),
-            this.wishlistService.upsertWishlist(body.userId, body.wishes, body.partnerId)
+            this.userService.updateUserEmail(userId, body.email),
+            this.userService.updateUserAddress(userId, body.address),
+            this.wishlistService.upsertWishlist(userId, body.wishes)
         ]);
 
         res.status(201);

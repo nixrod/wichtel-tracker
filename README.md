@@ -19,6 +19,7 @@ docker-compose up -d
 
 ### 2. Initialize the database
 
+First adapt the db password according to the .env file
 To do this run the statements in the scripts/db-init.sql file
 ```
 mysql -h 127.0.0.1 -uroot -p wichtel <scripts/db-init.sql

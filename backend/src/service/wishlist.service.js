@@ -2,11 +2,11 @@ const db = require('../mysql');
 
 class WishlistService {
 
-    async upsertWishlist(userId, wishes, partnerId) {
+    async upsertWishlist(userId, wishes) {
         if (await this._doesWishlistWithUserIdExist(userId)) {
-            await this._updateWishlist(userId, wishes, partnerId);
+            await this._updateWishlist(userId, wishes);
         } else {
-            await this._createWishlist(userId, wishes, partnerId);
+            await this._createWishlist(userId, wishes);
         }
     }
 
@@ -19,19 +19,19 @@ class WishlistService {
         });
     }
 
-    async _createWishlist(userId, wishes, partnerId) {
+    async _createWishlist(userId, wishes) {
         return new Promise(resolve => {
-            db.connection.query('INSERT into wishlists(user_id, wishes, partner_id) VALUES (?, ?, ?)',
-                [userId, wishes, partnerId], function (err) {
+            db.connection.query('INSERT into wishlists(user_id, wishes) VALUES (?, ?)',
+                [userId, wishes], function (err) {
                     if (err) throw err;
                     resolve();
                 });
         });
     }
 
-    async _updateWishlist(userId, wishes, partnerId) {
+    async _updateWishlist(userId, wishes) {
         return new Promise(resolve => {
-            db.connection.query('UPDATE wishlists SET wishes=?, partner_id=? WHERE user_id=?', [wishes, partnerId, userId], function (err) {
+            db.connection.query('UPDATE wishlists SET wishes=? WHERE user_id=?', [wishes, userId], function (err) {
                 if (err) throw err;
                 resolve();
             });

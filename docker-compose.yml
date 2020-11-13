@@ -9,6 +9,8 @@ services:
       DB_PW: ${DB_ROOT_PW}
       HOST: db
       SENDGRID_API_KEY: ${SENDGRID_API_KEY}
+      USER_PW: ${USER_PW}
+      ADMIN_PW: ${ADMIN_PW}
   db:
     image: "mysql:latest"
     volumes:

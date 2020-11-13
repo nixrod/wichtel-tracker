@@ -38,7 +38,7 @@ CREATE TABLE wishlists
 );
 
 # the gift table tracks the assignments of the wishlists
-CREATE TABLE gifts
+CREATE TABLE assignments
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     giver_id    INT,

@@ -1,5 +1,6 @@
 const UserService = require('../service/user.service');
 const AssignmentService = require('../service/assignment.service');
+const EmailService = require('../service/email.service');
 
 class AssignmentController {
 
@@ -7,6 +8,7 @@ class AssignmentController {
     constructor() {
         this.userService = new UserService();
         this.assignmentService = new AssignmentService();
+        this.emailService = new EmailService();
     }
 
 
@@ -28,7 +30,10 @@ class AssignmentController {
         let assignments = this.assignmentService.performAssignment(usersAndWishes);
         await this.assignmentService.storeAssignments(assignments);
 
-        res.json(assignments);
+        let emailData = await this.emailService.getEmailInfo();
+        this.emailService.sendMessages(emailData);
+
+        res.json(emailData);
     }
 
 

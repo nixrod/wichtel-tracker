@@ -51,7 +51,7 @@ class AssignmentService {
 
     async hasAssignmentHasAlreadyBeenPerformed() {
         return new Promise(resolve => {
-            db.connection.query('SELECT COUNT(*) as count FROM gifts', function (err, rows) {
+            db.connection.query('SELECT COUNT(*) as count FROM assignments', function (err, rows) {
                 if (err) throw err;
                 resolve(rows[0].count === 0);
             });
@@ -66,7 +66,7 @@ class AssignmentService {
             });
 
         return new Promise(resolve => {
-            db.connection.query('INSERT into gifts(giver_id, receiver_id) VALUES ?',
+            db.connection.query('INSERT into assignments(giver_id, receiver_id) VALUES ?',
                 [values], function (err) {
                     if (err) throw err;
                     resolve();

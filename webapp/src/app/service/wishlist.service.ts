@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Wishlist} from "../model/wishlist";
 import {Routes} from "./routes";
 import {Observable} from "rxjs";
+import { LoginService } from './login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,12 @@ import {Observable} from "rxjs";
 export class WishlistService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private loginService: LoginService) {
 
   }
 
   sendWishlist(wishlist: Wishlist): Observable<Wishlist> {
-    return this.http.post<Wishlist>(Routes.wishlists, wishlist);
+    return this.http.post<Wishlist>(Routes.wishlists, wishlist, this.loginService.getCreadentialHeader());
   }
 }

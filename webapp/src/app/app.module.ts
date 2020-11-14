@@ -9,12 +9,15 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
 import {MatButtonModule, MatInputModule, MatSelectModule, MatSnackBarModule} from "@angular/material";
 import {WishlistFormComponent} from './wishlist-form/wishlist-form.component';
 import {FormSuccessComponent} from './form-success/form-success.component';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './service/login.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     WishlistFormComponent,
-    FormSuccessComponent
+    FormSuccessComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import {FormSuccessComponent} from './form-success/form-success.component';
     MatButtonModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -92,7 +92,6 @@ export class WishlistFormComponent implements OnInit {
     let wishListData = new Wishlist(data.email, data.wishList, data.userId, data.partnerId);
     this.wishlistService.sendWishlist(wishListData)
       .subscribe(() => {
-        console.log('success');
         this.router.navigate(['/success']);
       }, err => {
         this._snackBar.open('Server error:' + err.error, null, {

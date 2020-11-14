@@ -16,7 +16,7 @@ export class WishlistService {
 
   }
 
-  sendWishlist(wishlist: Wishlist): Observable<Wishlist> {
-    return this.http.post<Wishlist>(Routes.wishlists, wishlist, this.loginService.getCreadentialHeader());
+  sendWishlist(wishlist: Wishlist, userId: number): Observable<Wishlist> {
+    return this.http.post<Wishlist>(Routes.users + `/${userId}/wishlist`, wishlist, this.loginService.getCreadentialHeader());
   }
 }

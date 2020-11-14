@@ -34,9 +34,9 @@ export class WishlistFormComponent implements OnInit {
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      partnerId: new FormControl('', [
+      address: new FormControl('', [
         Validators.required,
-        this.duplicatePersonValidator()
+        Validators.maxLength(5000)
       ])
     });
 
@@ -47,23 +47,6 @@ export class WishlistFormComponent implements OnInit {
       .subscribe(users => {
         this.users = users;
       });
-  }
-
-  duplicatePersonValidator(): ValidatorFn {
-    return (): { [key: string]: any } | null => {
-
-      let duplicate = false;
-      if (this.wishlistForm) {
-        let userId = this.wishlistForm.get('userId').value;
-        let partnerId = this.wishlistForm.get('partnerId').value;
-
-        if (userId === partnerId) {
-          duplicate = true;
-        }
-      }
-
-      return duplicate ? {'duplicatePerson': {value: true}} : null;
-    };
   }
 
   get userId(): AbstractControl {
@@ -78,10 +61,9 @@ export class WishlistFormComponent implements OnInit {
     return this.wishlistForm.get('wishList');
   }
 
-  get partnerId(): AbstractControl {
-    return this.wishlistForm.get('partnerId');
+  get address(): AbstractControl {
+    return this.wishlistForm.get('address');
   }
-
 
   onSubmit(data) {
 
@@ -89,8 +71,8 @@ export class WishlistFormComponent implements OnInit {
       return;
     }
 
-    let wishListData = new Wishlist(data.email, data.wishList, data.userId, data.partnerId);
-    this.wishlistService.sendWishlist(wishListData)
+    let wishListData = new Wishlist(data.email, data.wishList, data.address);
+    this.wishlistService.sendWishlist(wishListData, data.userId)
       .subscribe(() => {
         this.router.navigate(['/success']);
       }, err => {

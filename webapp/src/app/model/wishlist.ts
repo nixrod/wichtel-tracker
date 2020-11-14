@@ -2,14 +2,12 @@ export class Wishlist {
   id: number;
   email: string;
   wishes: string;
-  userId: number;
-  partnerId: number;
+  address: string;
 
 
-  constructor(email: string, wishes: string, userId: number, partnerId: number) {
+  constructor(email: string, wishes: string, address: string) {
     this.email = email;
     this.wishes = wishes;
-    this.userId = userId;
-    this.partnerId = partnerId;
+    this.address = address;
   }
 }

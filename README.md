@@ -10,6 +10,11 @@ It consists of multiple components:
 
 ## 🚶 Setting up local dev environment
 
+### 0. Login to canister container registry
+```
+docker login cloud.canister.io:5000
+```
+
 ### 1. Start docker compose
 
 This starts the backend and mysql database in detached mode.
@@ -52,7 +57,14 @@ Currently, there is one python script to trigger the mail sending of the wichtel
 2. Modify .env file with prod credentials 
 3. follow docker-compose setup above
 
+## 🔨 Build the project
 
+### Build
+```
 docker build -t cloud.canister.io:5000/nixrod/wichtel-backend .
-docker login cloud.canister.io:5000
+```
+
+### Push to container registry
+```
 docker push cloud.canister.io:5000/nixrod/wichtel-backend
+```

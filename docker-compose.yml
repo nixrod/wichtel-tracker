@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   web:
-    image: "cloud.canister.io:5000/nixrod/wichtel-backend"
+    image: "ghcr.io/nixrod/wichtel-tracker"
     ports:
       - "${WEB_PORT_PUBLISHED}:8080"
     restart: always

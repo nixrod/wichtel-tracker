@@ -53,7 +53,7 @@ DB_PW=<see .env> HOST=localhost npm run start
 ## 🔨 Continuous Integration
 A github action exists, which automatically builds and pushes the docker 
 container for every push to develop.
-Commits tagged with v.X.X.X are published as releases.
+Commits tagged with vX.X.X are published as releases.
 
 ### Manual Build and Push
 #### Build

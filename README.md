@@ -10,13 +10,6 @@ It consists of multiple components:
 
 ## 🚶 Setting up local dev environment
 
-### 0. Login to github container registry
-Generate a PAT: https://docs.github.com/en/free-pro-team@latest/github/authenticating-to-github/creating-a-personal-access-token
-```
-export CR_PAT=YOUR_TOKEN
-echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
-```
-
 ### 1. Set up all the secrets
 Configure the .env file with your API Key and secrets.
 
@@ -58,8 +51,9 @@ DB_PW=<see .env> HOST=localhost npm run start
 2. Follow Steps 1-3 above to run docker-compose in production
 
 ## 🔨 Continuous Integration
-
-TODO: Fill once gh action config is done
+A github action exists, which automatically builds and pushes the docker 
+container for every push to develop.
+Commits tagged with v.X.X.X are published as releases.
 
 ### Manual Build and Push
 #### Build

@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {WishlistFormComponent} from './wishlist-form.component';
+import { WishlistFormComponent } from './wishlist-form.component';
 
 describe('WishlistFormComponent', () => {
   let component: WishlistFormComponent;
   let fixture: ComponentFixture<WishlistFormComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [WishlistFormComponent]
     })

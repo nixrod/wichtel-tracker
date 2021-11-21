@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {WishlistFormComponent} from "./wishlist-form/wishlist-form.component";
-import {FormSuccessComponent} from "./form-success/form-success.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { WishlistFormComponent } from './wishlist-form/wishlist-form.component';
+import { FormSuccessComponent } from './form-success/form-success.component';
 import { LoginComponent } from './login/login.component';
 
 
@@ -12,7 +12,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

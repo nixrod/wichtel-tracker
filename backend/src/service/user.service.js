@@ -12,6 +12,15 @@ class UserService {
         });
     }
 
+    async getUsers() {
+        return new Promise(resolve => {
+            db.connection.query('SELECT * FROM users ORDER BY name', function (err, rows) {
+                if (err) throw err;
+                resolve(rows);
+            });
+        });
+    }
+
     async updateUserAddress(userId, address) {
         return new Promise(resolve => {
             db.connection.query('UPDATE users SET address = ? WHERE id= ?', [address, userId], function (err) {

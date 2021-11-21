@@ -2,23 +2,13 @@
 
 
   <mat-form-field>
-    <mat-label>Select your name</mat-label>
-    <mat-select formControlName="userId">
-      <mat-option [value]="user.id" *ngFor="let user of users">{{user.name}}</mat-option>
-    </mat-select>
-    <mat-error *ngIf="userId.getError('required')">Please select your name</mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput placeholder="Enter your email" id="email" type="email" formControlName="email">
-    <mat-error *ngIf="email.getError('email') && !email.getError('required')">Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="email.getError('required')">Please enter an email address</mat-error>
+    <mat-label>Your Name</mat-label>
+    <input matInput id="name" type="text" formControlName="name" [value]="user.name">
   </mat-form-field>
 
   <mat-form-field>
       <textarea matInput placeholder="Enter your wishlist" name="wishList" id="wishList" cols="30" rows="10"
-                formControlName="wishList"></textarea>
+                formControlName="wishList" [(ngModel)]="user.wishes"></textarea>
     <mat-error *ngIf="wishList.getError('maxlength') && !wishList.getError('required')">You entered too much text
     </mat-error>
     <mat-error *ngIf="wishList.getError('required')">Please enter your wishlist</mat-error>
@@ -26,7 +16,7 @@
 
   <mat-form-field>
     <textarea matInput placeholder="Enter your address" name="address" id="address" cols="30" rows="4"
-              formControlName="address"></textarea>
+              formControlName="address" [(ngModel)]="user.address"></textarea>
   <mat-error *ngIf="address.getError('maxlength') && !address.getError('required')">You entered too much text
   </mat-error>
   <mat-error *ngIf="address.getError('required')">Please enter your address</mat-error>

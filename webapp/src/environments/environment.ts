@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  host: '138.68.86.140',
-  port: 80
+  host: 'localhost',
+  port: 8080
 };
 
 /*

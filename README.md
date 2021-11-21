@@ -48,6 +48,7 @@ cd webapp
 npm install
 npm run start
 ```
+Make sure that you set the prod environment variables before deployment on a server.
 
 #### Backend
 ```

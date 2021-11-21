@@ -1,0 +1,20 @@
+<form [formGroup]="assignmentForm">
+  <h2>Your Wichtel Assignment</h2>
+
+  <mat-form-field>
+    <h6>Your Name:</h6>
+    <p>{{assignment.user_name}}</p>
+  </mat-form-field>
+
+  <mat-form-field>
+    <h6>Your assignment's Name</h6>
+    <p>{{assignment.assignment_name}}</p>
+  </mat-form-field>
+
+  <mat-form-field>
+    <h6>Your assignment's Wish</h6>
+    <textarea matInput name="wishList" id="wishList" cols="30" rows="10"
+              formControlName="assignmentWishlist" [value]="assignment.assignment_wishes"></textarea>
+  </mat-form-field>
+
+</form>

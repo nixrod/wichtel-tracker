@@ -27,7 +27,7 @@ test('shuffle verifier returns true for correct shuffle', () => {
         "2": 3,
         "3": 1
     }
-    expect(service.checkThatAllElementsAreShuffled(assignment)).toBeTruthy();
+    expect(service._checkThatAllElementsAreShuffled(assignment)).toBeTruthy();
 });
 
 test('shuffle verifier returns false for incorrect shuffle', () => {
@@ -36,10 +36,10 @@ test('shuffle verifier returns false for incorrect shuffle', () => {
         "2": 3,
         "3": 2
     }
-    expect(service.checkThatAllElementsAreShuffled(assignment)).toBeFalsy();
+    expect(service._checkThatAllElementsAreShuffled(assignment)).toBeFalsy();
 });
 
 test('unshuffled assignment is eventually returned shuffled', () => {
     let assignment = service.performAssignment(users);
-    expect(service.checkThatAllElementsAreShuffled(assignment)).toBeTruthy();
+    expect(service._checkThatAllElementsAreShuffled(assignment)).toBeTruthy();
 });

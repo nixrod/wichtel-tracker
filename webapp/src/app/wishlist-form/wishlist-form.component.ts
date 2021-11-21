@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../service/user.service';
-import { WishlistService } from '../service/wishlist.service';
 import { User } from '../model/user';
-import { Wishlist } from '../model/wishlist';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -14,27 +12,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class WishlistFormComponent implements OnInit {
 
-  users: User[];
+  accessId: string;
+  user: User;
   wishlistForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private wishlistService: WishlistService,
               private _snackBar: MatSnackBar,
-              private router: Router) {
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+    this.user = new User();
     this.wishlistForm = new FormGroup({
-      userId: new FormControl('', [
-        Validators.required
-      ]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.email
-      ]),
-      wishList: new FormControl('', [
+      name: new FormControl({value: this.user.name, disabled: true}, []),
+      wishList: new FormControl(this.user.wishes, [
         Validators.required,
         Validators.maxLength(5000)
       ]),
-      address: new FormControl('', [
+      address: new FormControl(this.user.address, [
         Validators.required,
         Validators.maxLength(5000)
       ])
@@ -43,18 +37,19 @@ export class WishlistFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userService.getUsers()
-      .subscribe(users => {
-        this.users = users;
+    this.accessId = this.activatedRoute.snapshot.queryParamMap.get('accessId');
+
+    this.userService.getUser(this.accessId)
+      .subscribe(user => {
+        this.user.name = user.name;
+        this.user.wishes = user.wishes;
+        this.user.address = user.address;
       });
   }
 
-  get userId(): AbstractControl {
-    return this.wishlistForm.get('userId');
-  }
 
-  get email(): AbstractControl {
-    return this.wishlistForm.get('email');
+  get name(): AbstractControl {
+    return this.wishlistForm.get('name');
   }
 
   get wishList(): AbstractControl {
@@ -71,10 +66,13 @@ export class WishlistFormComponent implements OnInit {
       return;
     }
 
-    let wishListData = new Wishlist(data.email, data.wishList, data.address);
-    this.wishlistService.sendWishlist(wishListData, data.userId)
+    let updatedUser = new User();
+    updatedUser.address = data.address;
+    updatedUser.wishes = data.wishList;
+
+    this.userService.updateUser(this.accessId, updatedUser)
       .subscribe(() => {
-        this.router.navigate(['/success']);
+        this.router.navigate(['/success'], {queryParamsHandling: 'preserve'});
       }, err => {
         this._snackBar.open('Server error:' + err.error, null, {
           duration: 5000,

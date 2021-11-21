@@ -1,7 +1,7 @@
-import {Wishlist} from './wishlist';
+import { Wishlist } from './wishlist';
 
 describe('Wishlist', () => {
   it('should create an instance', () => {
-    expect(new Wishlist()).toBeTruthy();
+    expect(new Wishlist('', '', '')).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { LoginService } from '../service/login.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   private verifyCredentials() {
     this.loginService.verifiyCredentials().subscribe(() => {
       this.router.navigate(['/wishlist']);
-    }, err => {
+    }, () => {
       this.cookieService.delete('username');
       this.cookieService.delete('password');
 

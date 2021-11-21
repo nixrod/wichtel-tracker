@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import {UserService} from "../service/user.service";
-import {WishlistService} from "../service/wishlist.service";
-import {MatSnackBar} from "@angular/material";
-import {User} from "../model/user";
-import {Wishlist} from "../model/wishlist";
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../service/user.service';
+import { WishlistService } from '../service/wishlist.service';
+import { User } from '../model/user';
+import { Wishlist } from '../model/wishlist';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-wishlist-form',

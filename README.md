@@ -5,7 +5,6 @@ It consists of multiple components:
 - A frontend written in Angular. 
 - A backend using Node.js.
 - A MYSQL Database.
-- Various management scripts.
 
 
 ## 🚶 Setting up local dev environment

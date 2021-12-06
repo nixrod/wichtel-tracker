@@ -1,42 +1,22 @@
 const db = require('../mysql');
+const {v4: uuidv4} = require('uuid');
 
 class UserService {
+
+    async getUser(accessId) {
+        return new Promise(resolve => {
+            db.connection.query('SELECT * FROM users WHERE access_id = ?', [accessId], function (err, rows) {
+                if (err) throw err;
+                resolve(rows[0]);
+            });
+        });
+    }
 
     async getUsers() {
         return new Promise(resolve => {
             db.connection.query('SELECT * FROM users ORDER BY name', function (err, rows) {
                 if (err) throw err;
                 resolve(rows);
-            });
-        });
-    }
-
-    async getUsersWithWishlist() {
-        return new Promise(resolve => {
-            db.connection.query(
-                'SELECT u.*, w.wishes\n' +
-                'FROM users u\n' +
-                'LEFT JOIN wishlists w on u.id = w.user_id', function (err, rows) {
-                    if (err) throw err;
-                    resolve(rows);
-                });
-        });
-    }
-
-    async doesUserIdExist(userId) {
-        return new Promise(resolve => {
-            db.connection.query('SELECT * FROM users WHERE id = ?', [userId], function (err, rows) {
-                if (err) throw err;
-                resolve(rows.length === 1);
-            });
-        });
-    }
-
-    async updateUserEmail(userId, email) {
-        return new Promise(resolve => {
-            db.connection.query('UPDATE users SET email = ? WHERE id= ?', [email, userId], function (err) {
-                if (err) throw err;
-                resolve();
             });
         });
     }
@@ -50,6 +30,26 @@ class UserService {
         });
     }
 
+    async updateUserWishlist(userId, wishes) {
+        return new Promise(resolve => {
+            db.connection.query('UPDATE users SET wishes = ? WHERE id= ?', [wishes, userId], function (err) {
+                if (err) throw err;
+                resolve();
+            });
+        });
+    }
+
+    async createUser(name) {
+        const accessId = uuidv4();
+
+        return new Promise(resolve => {
+            db.connection.query('INSERT into users(name, access_id) VALUES (?, ?)',
+                [name, accessId], function (err) {
+                    if (err) throw err;
+                    resolve();
+                });
+        });
+    }
 }
 
 module.exports = UserService;

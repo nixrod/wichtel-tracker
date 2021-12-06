@@ -4,37 +4,48 @@ const router = express.Router();
 const UserController = require('./controller/user.controller');
 const userController = new UserController();
 
-const WishlistController = require('./controller/wishlist.controller');
-const wishlistController = new WishlistController();
-
-const AssignmentController = require('./controller/assignment.controller')
-const assignmentController = new AssignmentController();
-
-const AuthController = require('./controller/auth.controller')
+const AuthController = require('./controller/auth.controller');
 const authController = new AuthController();
+
+const AdminController = require('./controller/admin.controller');
+const adminController = new AdminController();
+
+const StateController = require('./controller/state.controller');
+const stateController = new StateController();
 
 
 // Authentication definitions
-router.use('/users*', (req, res, next) => {
-    authController.authenticateUser(req, res, next);
+router.use('/state/finalize', (req, res, next) => {
+    authController.authenticateAdmin(req, res, next);
 });
 
 router.use('/admin*', (req, res, next) => {
     authController.authenticateAdmin(req, res, next);
-})
+});
 
-
-router.get('/users', async (req, res) => {
+// Endpoint Definitions
+router.get('/users/:accessId', async (req, res) => {
     await userController.getUser(req, res);
 });
 
-router.post('/users/:userId/wishlist', async (req, res) => {
-    await wishlistController.postWishlist(req, res);
+router.get('/users/:accessId/assignment', async (req, res) => {
+    await userController.getAssignment(req, res);
 });
 
-router.post('/admin/assignments', async (req, res) => {
-    await assignmentController.postAssignment(req, res);
+router.put('/users/:accessId', async (req, res) => {
+    await userController.putUser(req, res);
 });
 
+router.post('/admin/init', async (req, res) => {
+    await adminController.init(req, res);
+});
+
+router.get('/state', async (req, res) => {
+    await stateController.getState(req, res);
+});
+
+router.post('/state/finalize', async (req, res) => {
+    await stateController.setState(req, res);
+});
 
 module.exports = router;

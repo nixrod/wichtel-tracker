@@ -1,11 +1,6 @@
 class AuthController {
     constructor() {
-        this.userPass = process.env.USER_PW;
         this.adminPass = process.env.ADMIN_PW;
-    }
-
-    authenticateUser(req, res, next) {
-        this._authenticate(req, res, next, this.userPass);
     }
 
     authenticateAdmin(req, res, next) {

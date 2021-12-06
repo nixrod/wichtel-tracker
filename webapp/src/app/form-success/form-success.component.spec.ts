@@ -1,12 +1,12 @@
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {FormSuccessComponent} from './form-success.component';
+import { FormSuccessComponent } from './form-success.component';
 
 describe('FormSuccessComponent', () => {
   let component: FormSuccessComponent;
   let fixture: ComponentFixture<FormSuccessComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FormSuccessComponent]
     })

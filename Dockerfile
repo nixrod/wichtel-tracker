@@ -1,5 +1,5 @@
 # Stage 1: Install webapp
-FROM node:10
+FROM node:16
 WORKDIR /usr/src/webapp
 # copy package and package-log for dependency install
 COPY webapp/package*.json ./
@@ -9,7 +9,7 @@ COPY webapp .
 RUN npm run build
 
 # Stage 2: Test backend
-FROM node:10
+FROM node:16
 WORKDIR /usr/src/app
 COPY backend/package*.json ./
 RUN npm install
@@ -17,7 +17,7 @@ COPY backend .
 RUN npm run test
 
 # Stage 3: Bundle
-FROM node:10-alpine
+FROM node:16-alpine
 WORKDIR /usr/src/app
 COPY backend/package*.json ./
 RUN npm install --only=prod

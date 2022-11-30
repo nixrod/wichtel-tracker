@@ -1,3 +1,6 @@
+############################################################
+# ADAPT the root password here before executing the script #
+############################################################
 ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'my-secret-pw';
 flush privileges;
 

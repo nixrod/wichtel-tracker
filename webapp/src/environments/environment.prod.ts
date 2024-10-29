@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  host: 'wichtel.happelitos.tk',
+  host: 'wichtel-aktion.online',
   port: 80
 };
